@@ -63,4 +63,4 @@ O sistema permite gerenciar produtos, clientes e vendas, incluindo **baixa autom
 
 1. Clonar o repositório:
 ```bash
-git clone [[https://github.com/seu-usuario/ControleEstoque-<seu_rm>.git](https://github.com/stefanynovais/ControleEstoque_StefanyNovais.git)]
+git clone [(https://github.com/stefanynovais/ControleEstoque_StefanyNovais.git)]
