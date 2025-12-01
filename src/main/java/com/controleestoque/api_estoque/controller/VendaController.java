@@ -16,6 +16,15 @@ public class VendaController {
 
     private final VendaService vendaService;
 
+    @GetMapping("/{id}")
+public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
+    try {
+        Venda venda = vendaService.buscarPorId(id);
+        return ResponseEntity.ok(venda);
+    } catch (RuntimeException e) {
+        return ResponseEntity.notFound().build();
+    }
+}
     @PostMapping
     public ResponseEntity<?> registrar(@RequestBody VendaDTO vendaDTO) {
         try {

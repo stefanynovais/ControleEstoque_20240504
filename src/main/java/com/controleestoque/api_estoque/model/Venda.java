@@ -6,6 +6,10 @@ import lombok.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "tb_vendas")
 @Data
@@ -22,6 +26,7 @@ public class Venda {
     //relacionamento N:1 com Cliente
     @ManyToOne
     @JoinColumn(name = "cliente_id")
+    @JsonBackReference    
     private Cliente cliente;
 
     //relacionamento N:M via ItemVenda

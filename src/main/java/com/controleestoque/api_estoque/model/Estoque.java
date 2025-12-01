@@ -3,6 +3,8 @@ package com.controleestoque.api_estoque.model;
 import jakarta.persistence.*;
 import java.util.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "tb_estoques")
 public class Estoque {
@@ -17,6 +19,7 @@ public class Estoque {
     // É o lado ‘proprietário’ que contém a chave estrangeira (FK).
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id", nullable = false) // Define a FK na tabela tb_estoques.
+    @JsonIgnore
     private Produto produto;
 
     // Construtores, Getters e Setters...

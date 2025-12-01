@@ -2,6 +2,8 @@ package com.controleestoque.api_estoque.model;
 
 import java.math.BigDecimal;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -26,5 +28,6 @@ public class ItemVenda {
 
     @ManyToOne
     @JoinColumn(name = "venda_id")
+    @JsonIgnore
     private Venda venda;
 }

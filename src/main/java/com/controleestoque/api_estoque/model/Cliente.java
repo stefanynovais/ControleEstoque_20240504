@@ -5,6 +5,8 @@ import lombok.*;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "tb_clientes")
 @Data
@@ -22,5 +24,6 @@ public class Cliente {
 
     //relacionamento 1:N — Um cliente pode ter várias vendas
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+    @JsonManagedReference 
     private List<Venda> vendas;
 }
