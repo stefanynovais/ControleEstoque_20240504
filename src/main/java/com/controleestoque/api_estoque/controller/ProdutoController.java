@@ -53,22 +53,22 @@ public class ProdutoController {
 @ResponseStatus(HttpStatus.CREATED)
 public ResponseEntity<Produto> createProduto(@RequestBody Produto produto) {
 
-    // valida categoria
+    //validando a categoria criada
     if (produto.getCategoria() == null || produto.getCategoria().getId() == null) {
         return ResponseEntity.badRequest().build();
     }
 
-    // busca categoria gerenciada
+    //buscando a  categoria gerenciada
     var categoriaOpt = categoriaRepository.findById(produto.getCategoria().getId());
     if (categoriaOpt.isEmpty()) {
         return ResponseEntity.badRequest().build();
     }
     produto.setCategoria(categoriaOpt.get());
 
-    // Validar e associar fornecedores (se vierem como lista de objetos com id)
+    //validando e associando fornecedores (se vierem como lista de objetos com id)
     if (produto.getFornecedores() != null && !produto.getFornecedores().isEmpty()) {
 
-        // usa explicitamente o tipo completo para evitar confusão de imports
+        //usa o tipo completo para evitar erro de imports
         java.util.Set<com.controleestoque.api_estoque.model.Fornecedor> fornecedoresValidos = new java.util.HashSet<>();
 
         for (com.controleestoque.api_estoque.model.Fornecedor f : produto.getFornecedores()) {
@@ -78,14 +78,12 @@ public ResponseEntity<Produto> createProduto(@RequestBody Produto produto) {
             }
         }
 
-        // Se quiser exigir pelo menos 1 fornecedor válido:
-        // if (fornecedoresValidos.isEmpty()) return ResponseEntity.badRequest().build();
 
         produto.setFornecedores(fornecedoresValidos);
     }
 
-    // Se o produto já tiver Estoque embutido (um objeto Estoque com produto.id),
-    // é recomendado setar produto no estoque também:
+    //produto com Estoque embutido (um objeto Estoque com produto.id),
+    //*fiz isso no vídeo, para demonstrar a consulta de estoque* 
     if (produto.getEstoque() != null) {
         produto.getEstoque().setProduto(produto);
     }

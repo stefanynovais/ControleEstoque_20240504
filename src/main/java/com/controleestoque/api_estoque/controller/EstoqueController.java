@@ -19,7 +19,7 @@ public class EstoqueController {
     private final EstoqueRepository estoqueRepository;
     private final ProdutoRepository produtoRepository;
 
-    // --- Consulta estoque por ID ---
+    //consulta o estoque por id
     @GetMapping("/{id}")
     public ResponseEntity<Estoque> getById(@PathVariable Long id) {
         return estoqueRepository.findById(id)
@@ -27,7 +27,7 @@ public class EstoqueController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
-    // --- Consulta estoque pelo ID do produto ---
+    //consulta o estoque pelo id do produto
     @GetMapping("/produto/{produtoId}")
     public ResponseEntity<Estoque> getByProdutoId(@PathVariable Long produtoId) {
 
@@ -44,7 +44,7 @@ public class EstoqueController {
         return ResponseEntity.ok(estoque);
     }
 
-    // --- Criar estoque para um produto ---
+    //criação do estoque para um o produto
     @PostMapping
     public ResponseEntity<Estoque> create(@RequestBody Estoque estoqueRequest) {
 

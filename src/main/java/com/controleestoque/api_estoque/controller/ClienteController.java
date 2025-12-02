@@ -17,6 +17,8 @@ public class ClienteController {
 
     private final ClienteService clienteService;
 
+
+//endpoints 
     @PostMapping
     public Cliente criar(@RequestBody Cliente c) { return clienteService.salvar(c); }
 

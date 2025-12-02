@@ -16,6 +16,7 @@ public class VendaController {
 
     private final VendaService vendaService;
 
+//endpoints
     @GetMapping("/{id}")
 public ResponseEntity<?> buscarPorId(@PathVariable Long id) {
     try {

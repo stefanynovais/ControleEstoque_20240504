@@ -26,19 +26,19 @@ public class VendaService {
                 .orElseThrow(() -> new RuntimeException("Venda não encontrada com id: " + id));
     }
 
-    @Transactional  // garante rollback se algo der errado
+    @Transactional  //rollback se algo der errado
     public Venda registrarVenda(VendaDTO dto) {
 
-        // 1. Busca o cliente da venda
+        //buscar o cliente da venda
         Cliente cliente = clienteRepository.findById(dto.getClienteId())
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado"));
 
-        // 2. Cria a venda vazia
+        //cria a venda vazia
         Venda venda = new Venda();
         venda.setCliente(cliente);
-        venda.setItens(new ArrayList<>());  // inicia a lista de itens
+        venda.setItens(new ArrayList<>());  //inicia a lista de itens
 
-        // 3️⃣ Primeiro: Verificar estoque de todos os itens
+        //Verificar estoque de todos os itens
         for (VendaItemDTO itemDTO : dto.getItens()) {
             Produto produto = produtoRepository.findById(itemDTO.getProdutoId())
                     .orElseThrow(() -> new RuntimeException("Produto não encontrado: " + itemDTO.getProdutoId()));
@@ -48,28 +48,28 @@ public class VendaService {
             }
         }
 
-        // 4️⃣ Depois: Dar baixa no estoque e criar os itens
+        //Dar baixa no estoque e criar os itens; só se a requisição do cliente for correta
         for (VendaItemDTO itemDTO : dto.getItens()) {
             Produto produto = produtoRepository.findById(itemDTO.getProdutoId()).get();
 
-            // Baixa no estoque
+            //baixa no estoque
             produto.getEstoque().setQuantidade(
                     produto.getEstoque().getQuantidade() - itemDTO.getQuantidade()
             );
             produtoRepository.save(produto);
 
-            // Cria item da venda
+            //cria item da venda
             ItemVenda itemVenda = new ItemVenda();
             itemVenda.setProduto(produto);
             itemVenda.setQuantidade(itemDTO.getQuantidade());
             itemVenda.setPrecoUnitario(produto.getPreco());
             itemVenda.setVenda(venda);  // associa ao pai
 
-            // Adiciona item na lista da venda
+            //adiciona item na lista da venda
             venda.getItens().add(itemVenda);
         }
 
-        // 5️⃣ Salva a venda inteira com todos os itens
+        //salva a venda inteira com todos os itens que o cliente pediu
         return vendaRepository.save(venda);
     }
 }
