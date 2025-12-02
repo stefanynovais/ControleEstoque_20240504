@@ -42,7 +42,7 @@ Permite gerenciar produtos, clientes e vendas, incluindo:
 
 ## 📹 Demonstração da API (Vídeo)
 
-**Duração máxima:** 3 minutos
+**Link:** https://drive.google.com/file/d/1qADKWoBH8dfSI3wuHcRePTJFfuBbE_34/view?usp=drivesdk
 
 **Conteúdo do vídeo:**
 1. 🎬 Apresentação facial do aluno  
