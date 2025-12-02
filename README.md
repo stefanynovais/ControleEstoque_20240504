@@ -44,5 +44,5 @@ Permite gerenciar produtos, clientes e vendas, incluindo:
 
 ### 1️⃣ Clonar o repositório
 ```bash
-git clone # 📦 https://github.com/stefanynovais/ControleEstoque_StefanyNovais.git
+git clone (https://github.com/stefanynovais/ControleEstoque_StefanyNovais.git)
 
